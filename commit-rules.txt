@@ -1,0 +1,77 @@
+Conventional Commit Types
+
+feat
+
+New feature. Example: feat: add audiobook player
+
+fix
+
+Bug fix. Example: fix: resolve login issue
+
+docs
+
+Documentation only. Example: docs: update README
+
+style
+
+Formatting, whitespace, UI styling (no logic changes). Example:
+style: improve button spacing
+
+refactor
+
+Code restructuring without changing behavior. Example:
+refactor: simplify auth middleware
+
+perf
+
+Performance improvement. Example: perf: optimize image loading
+
+test
+
+Add or update tests. Example: test: add auth unit tests
+
+build
+
+Build system or dependencies. Example: build: upgrade Next.js
+
+ci
+
+CI/CD configuration. Example: ci: add GitHub Actions workflow
+
+chore
+
+Maintenance tasks. Example: chore: update dependencies
+
+revert
+
+Revert a previous commit. Example: revert: revert audio caching
+
+Optional scopes
+
+Examples: - feat(auth): add Clerk authentication - feat(player): add
+background playback - fix(api): resolve streaming issue -
+refactor(database): optimize queries
+
+General Rules
+
+-   Use lowercase types.
+-   Format: <type>(optional-scope): short description
+-   Keep the subject concise (prefer under 72 characters).
+-   Use imperative mood: “add”, “fix”, “update”, not “added” or “fixed”.
+
+Good Examples
+
+-   feat: add story reader
+-   feat(player): support background audio
+-   fix(auth): resolve login redirect
+-   docs: update installation guide
+-   refactor(ui): simplify sidebar component
+-   perf(images): optimize thumbnails
+
+Bad Examples
+
+-   update
+-   hello
+-   changes
+-   final
+-   fixed stuff

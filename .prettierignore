@@ -1,0 +1,38 @@
+# Dependencies
+node_modules
+
+# Next.js
+.next
+out
+
+# Build
+dist
+build
+coverage
+
+# Package managers
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Generated
+*.min.js
+*.min.css
+
+# Static assets
+public
+
+# Vercel
+.vercel
+
+# IDE
+.vscode
+.idea
