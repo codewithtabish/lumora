@@ -1,12 +1,20 @@
+import { ModeToggle } from "@/components/(app)/(common)/(theme)/mode-toggler";
+import { AppShell } from "@/components/(app)/(common)/app-shell";
+import { AppShellContainer } from "@/components/(app)/(common)/app-shell-container";
+import { Button } from "@/components/ui/button";
 import React from "react";
 
 const HomePage = () => {
   return (
-    <div>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime error similique et magni
-      placeat iusto, dolor voluptatibus nesciunt nobis autem voluptate necessitatibus odio, quisquam
-      culpa suscipit. Nam rem adipisci voluptas.
-    </div>
+    <AppShell>
+      <AppShellContainer className="py-2">
+        <ModeToggle />
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi repellendus blanditiis
+        debitis officia dolore vel libero, perferendis itaque, aut ab eaque at ipsum labore
+        asperiores suscipit velit quam ex facilis!
+        <Button>Checks</Button>
+      </AppShellContainer>
+    </AppShell>
   );
 };
 
