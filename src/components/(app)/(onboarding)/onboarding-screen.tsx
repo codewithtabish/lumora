@@ -2,9 +2,10 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { OnboardingSlide as SlideType } from "@/types/onboarding";
 import Image from "next/image";
 import { ChevronRight, Sparkles } from "lucide-react";
+
+import { OnboardingSlide as SlideType } from "@/types/onboarding";
 import { cn } from "@/lib/utils";
 
 interface OnboardingScreenProps {
@@ -15,7 +16,11 @@ interface OnboardingScreenProps {
 
 export function OnboardingScreen({ slides, onComplete, onSkip }: OnboardingScreenProps) {
   const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(0);
+  const [direction, setDirection] = useState(1);
+
+  const slide = slides[current];
+
+  const isLast = current === slides.length - 1;
 
   const goTo = useCallback(
     (index: number) => {
@@ -33,133 +38,287 @@ export function OnboardingScreen({ slides, onComplete, onSkip }: OnboardingScree
     }
   }, [current, slides.length, goTo, onComplete]);
 
-  const handlePrev = useCallback(() => {
+  const handlePrevious = useCallback(() => {
     if (current > 0) {
       goTo(current - 1);
     }
   }, [current, goTo]);
 
-  const isLast = current === slides.length - 1;
-  const slide = slides[current];
-
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") handleNext();
-      if (e.key === "ArrowLeft") handlePrev();
+    const handleKeyboard = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight") {
+        handleNext();
+      }
+
+      if (event.key === "ArrowLeft") {
+        handlePrevious();
+      }
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleNext, handlePrev]);
+
+    window.addEventListener("keydown", handleKeyboard);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyboard);
+    };
+  }, [handleNext, handlePrevious]);
 
   return (
-    <div className="flex h-[100dvh] flex-col overflow-hidden bg-background">
-      {/* Content Group - Centered vertically as one unit */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 min-h-0">
+    <main
+      className="
+        flex
+        h-dvh
+        min-h-dvh
+        flex-col
+        overflow-hidden
+        bg-background
+      "
+      style={{
+        paddingTop: "env(safe-area-inset-top)",
+        paddingBottom: "env(safe-area-inset-bottom)",
+      }}
+    >
+      {/* CONTENT */}
+
+      <section
+        className="
+          flex
+          flex-1
+          items-center
+          justify-center
+          overflow-hidden
+          px-6
+        "
+      >
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={slide.id}
-            initial={{ opacity: 0, x: direction * 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: direction * -40 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="flex flex-col items-center w-full"
-          >
-            {/* Glow */}
-            <div
-              className={cn(
-                "absolute top-[12%] h-32 w-32 rounded-full blur-3xl opacity-10 pointer-events-none",
-                "bg-gradient-to-br",
-                slide.gradient,
-              )}
-            />
 
-            {/* Image */}
+            initial={{
+              opacity: 0,
+              x: direction * 50,
+            }}
+
+            animate={{
+              opacity: 1,
+              x: 0,
+            }}
+
+            exit={{
+              opacity: 0,
+              x: direction * -50,
+            }}
+
+            transition={{
+              duration: 0.25,
+            }}
+
+            className="
+              flex
+              w-full
+              max-w-sm
+              flex-col
+              items-center
+            "
+          >
+            {/* IMAGE */}
+
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.05, duration: 0.3 }}
-              className={cn(
-                "relative flex items-center justify-center overflow-hidden rounded-[1.75rem]",
-                "bg-gradient-to-br from-card/50 to-card/20",
-                "border border-border/30 shadow-xl",
-              )}
-              style={{
-                width: "min(58vw, 240px)",
-                height: "min(58vw, 240px)",
+              initial={{
+                scale: 0.9,
+                opacity: 0,
               }}
+
+              animate={{
+                scale: 1,
+                opacity: 1,
+              }}
+
+              transition={{
+                duration: 0.25,
+              }}
+
+              className="
+                relative
+                mb-6
+                aspect-square
+                w-[70vw]
+                max-w-72
+                overflow-hidden
+                rounded-[2rem]
+                border
+                border-border/30
+                bg-card/40
+                shadow-xl
+              "
             >
               <Image
                 src={slide.image}
+
                 alt={slide.title}
-                width={240}
-                height={240}
-                className="object-contain p-5"
-                priority={slide.id === 1}
-                draggable={false}
+
+                fill
+
+                sizes="
+                  (max-width:640px) 70vw,
+                  280px
+                "
+
+                priority={current === 0}
+
+                className="
+                  object-contain
+                  p-5
+                "
               />
             </motion.div>
 
-            {/* Title - TIGHT to image */}
-            <motion.h2
-              initial={{ y: 12, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.15, duration: 0.3 }}
-              className="mt-4 mb-1.5 text-center text-[1.5rem] leading-tight font-bold tracking-tight text-foreground"
+            {/* TITLE */}
+
+            <motion.h1
+              initial={{
+                y: 15,
+                opacity: 0,
+              }}
+
+              animate={{
+                y: 0,
+                opacity: 1,
+              }}
+
+              transition={{
+                delay: 0.1,
+              }}
+
+              className="
+                text-center
+                text-2xl
+                font-bold
+                tracking-tight
+              "
             >
               {slide.title}
-            </motion.h2>
+            </motion.h1>
 
-            {/* Description - TIGHT to title */}
+            {/* DESCRIPTION */}
+
             <motion.p
-              initial={{ y: 12, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.3 }}
-              className="max-w-[280px] text-center text-[0.8125rem] leading-snug text-muted-foreground"
+              initial={{
+                y: 15,
+                opacity: 0,
+              }}
+
+              animate={{
+                y: 0,
+                opacity: 1,
+              }}
+
+              transition={{
+                delay: 0.15,
+              }}
+
+              className="
+                mt-2
+                max-w-77.5
+                text-center
+                text-sm
+                leading-relaxed
+                text-muted-foreground
+              "
             >
               {slide.description}
             </motion.p>
           </motion.div>
         </AnimatePresence>
-      </div>
+      </section>
 
-      {/* Bottom Controls - TIGHT to content, minimal gap */}
-      <div className="px-6 pb-5 pt-1 shrink-0">
-        {/* Dots */}
-        <div className="mb-2.5 flex items-center justify-center gap-1.5">
-          {slides.map((_, i) => (
+      {/* FOOTER */}
+
+      <footer
+        className="
+          shrink-0
+          px-6
+          pb-5
+        "
+      >
+        {/* DOTS */}
+
+        <div
+          className="
+            mb-5
+            flex
+            justify-center
+            gap-2
+          "
+        >
+          {slides.map((_, index) => (
             <motion.div
-              key={i}
-              className={cn(
-                "h-1.5 rounded-full",
-                i === current ? "bg-primary" : "bg-muted-foreground/20",
-              )}
+              key={index}
+
               animate={{
-                width: i === current ? 20 : 6,
-                opacity: i === current ? 1 : 0.5,
+                width: index === current ? 28 : 8,
               }}
-              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 30,
+              }}
+
+              className={cn(
+                "h-2 rounded-full",
+                index === current ? "bg-primary" : "bg-muted-foreground/25",
+              )}
             />
           ))}
         </div>
 
-        {/* Button */}
+        {/* BUTTON */}
+
         <motion.button
-          whileTap={{ scale: 0.97 }}
+          whileTap={{
+            scale: 0.97,
+          }}
+
           onClick={handleNext}
-          className={cn(
-            "h-11 w-full rounded-xl text-sm font-semibold text-white",
-            "bg-primary hover:bg-primary/90",
-            "shadow-md shadow-primary/20 transition-all duration-200",
-          )}
+
+          className="
+            flex
+            h-12
+            w-full
+            items-center
+            justify-center
+            rounded-xl
+            bg-primary
+            text-sm
+            font-semibold
+            text-white
+            shadow-lg
+          "
         >
           <AnimatePresence mode="wait">
             <motion.span
-              key={isLast ? "get-started" : "next"}
-              initial={{ y: 6, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -6, opacity: 0 }}
-              transition={{ duration: 0.12 }}
-              className="flex items-center justify-center gap-1.5"
+              key={isLast ? "start" : "next"}
+
+              initial={{
+                opacity: 0,
+                y: 5,
+              }}
+
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+
+              exit={{
+                opacity: 0,
+                y: -5,
+              }}
+
+              className="
+                flex
+                items-center
+                gap-2
+              "
             >
               {isLast ? (
                 <>
@@ -176,35 +335,48 @@ export function OnboardingScreen({ slides, onComplete, onSkip }: OnboardingScree
           </AnimatePresence>
         </motion.button>
 
-        {/* Back / Skip */}
-        <div className="mt-2 flex items-center justify-between h-5">
-          <button
-            onClick={handlePrev}
-            className={cn(
-              "text-xs font-medium transition-colors",
-              current > 0
-                ? "text-muted-foreground hover:text-foreground"
-                : "text-transparent pointer-events-none",
-            )}
-          >
-            Back
-          </button>
+        {/* BACK / SKIP */}
 
-          {onSkip && !isLast ? (
+        <div
+          className="
+            mt-3
+            flex
+            h-5
+            items-center
+            justify-between
+          "
+        >
+          {current > 0 ? (
+            <button
+              onClick={handlePrevious}
+
+              className="
+                text-xs
+                font-medium
+                text-muted-foreground
+              "
+            >
+              Back
+            </button>
+          ) : (
+            <div />
+          )}
+
+          {!isLast && onSkip && (
             <button
               onClick={onSkip}
-              className="text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+
+              className="
+                text-xs
+                font-medium
+                text-muted-foreground
+              "
             >
               Skip
             </button>
-          ) : (
-            <div className="w-8" />
           )}
         </div>
-      </div>
-
-      {/* Bottom safe area */}
-      <div className="shrink-0 h-1" />
-    </div>
+      </footer>
+    </main>
   );
 }
