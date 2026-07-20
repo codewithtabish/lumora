@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   metadataBase:
     process.env.NODE_ENV === "development"
       ? new URL("http://localhost:3000")
-      : new URL("https://your-domain.com"),
+      : new URL("https://lumora-eosin-eight.vercel.app"),
   title: {
     default: "Lumora",
     template: "%s | Lumora",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 
     apple: [
       {
-        url: "/apple-icon.png",
+        url: "//apple-icon.png",
       },
     ],
 
@@ -149,3 +149,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+// https://www.pwabuilder.com/imageGenerator

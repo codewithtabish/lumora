@@ -55,21 +55,21 @@ export default function manifest(): MetadataRoute.Manifest {
 
     screenshots: [
       {
-        src: "/screenshots/home.png",
+        src: "/screenshots/home.jpg",
         sizes: "1080x2400",
         type: "image/png",
         form_factor: "narrow",
         label: "Discover audiobooks, stories and podcasts",
       },
       {
-        src: "/screenshots/player.png",
+        src: "/screenshots/player.jpg",
         sizes: "1080x2400",
         type: "image/png",
         form_factor: "narrow",
         label: "Modern audio player",
       },
       {
-        src: "/screenshots/library.png",
+        src: "/screenshots/library.jpg",
         sizes: "1080x2400",
         type: "image/png",
         form_factor: "narrow",
