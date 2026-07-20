@@ -218,7 +218,7 @@ export function OnboardingScreen({ slides, onComplete, onSkip }: OnboardingScree
 
               className="
                 mt-2
-                max-w-77.5
+                max-w-
                 text-center
                 text-sm
                 leading-relaxed

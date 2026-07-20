@@ -10,12 +10,12 @@ export default function OnboardingPage() {
 
   const handleComplete = () => {
     localStorage.setItem("onboarding_seen", "true");
-    router.push("/");
+    router.push("/login");
   };
 
   const handleSkip = () => {
     localStorage.setItem("onboarding_seen", "true");
-    router.push("/");
+    router.push("/login");
   };
 
   return (
