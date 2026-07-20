@@ -101,7 +101,7 @@ export function OnboardingScreen({ slides, onComplete, onSkip }: OnboardingScree
       <div className="shrink-0" style={{ height: "max(16px, env(safe-area-inset-top))" }} />
 
       {/* Main Content - larger image area */}
-      <div className="flex flex-1 flex-col items-center justify-center px-6 overflow-hidden">
+      <div className="flex flex-1 flex-col justify-between px-6 pt-3 pb-2 overflow-hidden">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={slide.id}
@@ -115,7 +115,7 @@ export function OnboardingScreen({ slides, onComplete, onSkip }: OnboardingScree
             <div
               className={cn(
                 "absolute top-[5%] h-40 w-40 rounded-full blur-3xl opacity-10 pointer-events-none",
-                "bg-gradient-to-br",
+                "bg-linear-to-br",
                 slide.gradient,
               )}
             />
@@ -127,12 +127,12 @@ export function OnboardingScreen({ slides, onComplete, onSkip }: OnboardingScree
               transition={{ delay: 0.05, duration: 0.25 }}
               className={cn(
                 "relative mb-4 flex items-center justify-center overflow-hidden rounded-[1.5rem]",
-                "bg-gradient-to-br from-card/40 to-card/15",
+                "bg-linear-to-br from-card/40 to-card/15",
                 "border border-border/25 shadow-xl",
               )}
               style={{
-                width: "min(55vw, 260px)",
-                height: "min(55vw, 260px)",
+                width: "clamp(200px, 42vw, 280px)",
+                height: "clamp(200px, 42vw, 280px)",
               }}
             >
               <Image
@@ -170,7 +170,7 @@ export function OnboardingScreen({ slides, onComplete, onSkip }: OnboardingScree
       </div>
 
       {/* Bottom Controls */}
-      <div className="px-6 pb-6 pt-3 shrink-0">
+      <div className="px-6 pb-[max(20px,env(safe-area-inset-bottom))] pt-4 shrink-0">
         {/* Dots */}
         <div className="mb-3 flex items-center justify-center gap-2">
           {slides.map((_, i) => (

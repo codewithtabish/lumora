@@ -13,7 +13,15 @@ const HomePage = () => {
         <hr />
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi repellendus blanditiis
         debitis officia dolore vel libero, perferendis itaque, aut ab eaque at ipsum labore
-        asperiores suscipit velit quam ex facilis!
+        asperiores suscipit velit quam ex facilis! Lorem, ipsum dolor sit amet consectetur
+        adipisicing elit. Delectus mollitia molestiae eaque unde doloremque numquam illo cupiditate
+        temporibus sint maxime tempora soluta, quas distinctio atque earum, incidunt animi
+        voluptatum minima! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus
+        mollitia molestiae eaque unde doloremque numquam illo cupiditate temporibus sint maxime
+        tempora soluta, quas distinctio atque earum, incidunt animi voluptatum minima! Lorem, ipsum
+        dolor sit amet consectetur adipisicing elit. Delectus mollitia molestiae eaque unde
+        doloremque numquam illo cupiditate temporibus sint maxime tempora soluta, quas distinctio
+        atque earum, incidunt animi voluptatum minima!
         <Button>Checks</Button>
         <Link href={"/onboarding"}>
           <Button>Onboading</Button>
