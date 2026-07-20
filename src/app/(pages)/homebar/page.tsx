@@ -1,3 +1,4 @@
+import { ModeToggle } from "@/components/(app)/(common)/(theme)/mode-toggler";
 import { AppShell } from "@/components/(app)/(common)/app-shell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,7 +26,9 @@ const HomeScreenPage = () => {
               <div>
                 <p className="text-sm text-muted-foreground">Good Evening 👋</p>
 
-                <h1 className="mt-1 text-3xl font-bold tracking-tight">Welcome to Lumora .</h1>
+                <h1 className="mt-1 text-3xl font-bold tracking-tight">
+                  Welcome to Lumora . <ModeToggle />
+                </h1>
               </div>
 
               <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-primary text-primary-foreground shadow-lg">
