@@ -2,7 +2,7 @@ import { ModeToggle } from "@/components/(app)/(common)/(theme)/mode-toggler";
 import { AppShell } from "@/components/(app)/(common)/app-shell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SignOutButton } from "@clerk/nextjs";
+import { SignOutButton, UserButton } from "@clerk/nextjs";
 import {
   BookOpen,
   Headphones,
@@ -32,7 +32,10 @@ const HomeScreenPage = () => {
               </div>
 
               <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-primary text-primary-foreground shadow-lg">
-                <Headphones className="h-7 w-7" />
+                <div>
+                  <Headphones className="h-7 w-7" />
+                  <UserButton />
+                </div>
               </div>
             </div>
 
