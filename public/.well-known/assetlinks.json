@@ -5,7 +5,7 @@
     ],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.codewithtabish.lumora",
+      "package_name": "app.vercel.lumora_eosin_eight.twa",
       "sha256_cert_fingerprints": [
         "4F:F6:E3:A7:88:FF:70:CD:97:E0:3E:D7:B4:43:C0:E6:59:CC:F9:2A:74:72:7B:3F:43:87:D2:A4:61:05:01:50"
       ]
